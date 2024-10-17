@@ -1,3 +1,5 @@
+let landingPage = document.querySelector('.landing-page')
+
 let mainColors = localStorage.getItem("color_option");
 if(mainColors !== null){
     document.documentElement.style.setProperty('--main-color', localStorage.getItem("color_option"));
@@ -12,25 +14,19 @@ if(mainColors !== null){
 }
 
 
-let landingPage = document.querySelector(".landing-page");
-let ImagesArray = ["imgs/01.jpg", "imgs/05.jpeg","imgs/06.jpg", "imgs/07.png","imgs/08.png","imgs/010.jpg","imgs/03.jpg"];
-let backgroundOption = true
-let backgroundInterval;
+let ImagesArray = ["01.jpg", "05.jpeg", "06.jpg", "07.png", "08.png", "010.jpg", "03.jpg"];
 
-// Call the function to load images when the page loads
-window.onload = function() {
-  loadImages(imageNames, imageFolderPath);
-};
+        let backgroundOption = true;
+        let backgroundInterval;
 
-// Call the function to load images when the page loads
-window.onload = function() {
-  loadImages(imageNames, imageFolderPath);
-};
+setInterval(()=> {
+    let randomNumber = Math.floor(Math.random() * ImagesArray.length)
 
+    landingPage.style.backgroundImage = 'url("imgs/' + ImagesArray[randomNumber] + '")'
 
+},5000)
 
-
-
+       
 let background = localStorage.getItem("random_background");
 if(background !== null){
     if(background === 'true'){
@@ -49,20 +45,7 @@ else{
             document.querySelector(".random-background .yes").classList.add("active");
         }
     })
-
-   
-
 }
-
-function randomImage(){
-    if(backgroundOption === true){
-        backgroundInterval = setInterval( () => {
-            let randomNumber = Math.floor(Math.random()* ImagesArray.length );
-            landingPage.style.backgroundImage = 'url(" ' + ImagesArray[randomNumber]+'")';
-        },4000)
-    }
-}
-randomImage()
 
 
 document.querySelector(".toggle .fa-gear").onclick = function (){
@@ -84,7 +67,6 @@ randomBackEl.forEach(span => {
             backgroundOption === true
             randomImage()
             localStorage.setItem("random_background", true)
-
         }
         else{
             backgroundOption === false
